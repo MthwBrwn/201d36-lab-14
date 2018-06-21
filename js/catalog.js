@@ -1,6 +1,7 @@
 /* global Product, Cart */
-
+  
 'use strict';
+
 
 // Set up an empty cart for use on this page.
 var cart = new Cart([]);
@@ -12,6 +13,11 @@ function populateForm() {
   //TODO: Add an <option> tag inside the form's select for each product
   var selectElement = document.getElementById('items');
   for (var i in Product.allProducts) {
+    var newElem = document.createElement('option');
+    // give content
+    newElem.textContent= Product.allProducts[i].name;
+    // append to interact with Dom      
+    selectElement.appendChild(newElem);
 
   }
 
@@ -35,8 +41,18 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
+  // prevents reload
+  event.preventDefault();
+
+  var itemSelect = document.getElementById('items').value;
+  console.log(itemSelect);
+
   // TODO: get the quantity
+  var quantitySelect = document.getElementById('quantity').value;
+  console.log(quantitySelect);
   // TODO: using those, add one item to the Cart
+  var itemArray = [itemSelect, quantitySelect];
+  cart.push(itemArray);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
